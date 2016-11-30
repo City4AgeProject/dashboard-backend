@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package otn.mobile.bl;
+package c4a.mobile.bl;
 
 import c4a.data.persistency.GereatricFactor;
 import c4a.data.persistency.Items;

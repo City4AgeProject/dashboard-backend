@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -18,14 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author EMantziou
  */
 @Entity
-//@Table(name = "series_data", schema="public")
-//@XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "SeriesData.findAll", query = "SELECT s FROM SeriesData s"),
-//    @NamedQuery(name = "SeriesData.findById", query = "SELECT s FROM SeriesData s WHERE s.id = :id"),
-//    @NamedQuery(name = "SeriesData.findByName", query = "SELECT s FROM SeriesData s WHERE s.name = :name"),
-//    @NamedQuery(name = "SeriesData.findByData", query = "SELECT s FROM SeriesData s WHERE s.datas= :datas")})
+@Table(name = "series", schema="public")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Series.findAll", query = "SELECT s FROM Series s"),
+    @NamedQuery(name = "Series.findById", query = "SELECT s FROM Series s WHERE s.id = :id"),
+    @NamedQuery(name = "Series.findByName", query = "SELECT s FROM Series s WHERE s.name = :name"),
+    @NamedQuery(name = "Series.findByData", query = "SELECT s FROM Series s WHERE s.datas= :datas")})
+
 public class Series implements Serializable {
 
     private static final long serialVersionUID = 1L;

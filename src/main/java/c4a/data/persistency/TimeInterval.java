@@ -32,12 +32,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @Table(name = "time_interval")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "TimeInterval.findAll", query = "SELECT t FROM TimeInterval t"),
-//    @NamedQuery(name = "TimeInterval.findByTimeIntervalId", query = "SELECT t FROM TimeInterval t WHERE t.timeIntervalId = :timeIntervalId"),
-//    @NamedQuery(name = "TimeInterval.findByIntervalStart", query = "SELECT t FROM TimeInterval t WHERE t.intervalStart = :intervalStart"),
-//    @NamedQuery(name = "TimeInterval.findByIntervalEnd", query = "SELECT t FROM TimeInterval t WHERE t.intervalEnd = :intervalEnd"),
-//    @NamedQuery(name = "TimeInterval.findByTypicalPeriod", query = "SELECT t FROM TimeInterval t WHERE t.typicalPeriod = :typicalPeriod")})
+@NamedQueries({
+    @NamedQuery(name = "TimeInterval.findAll", query = "SELECT t FROM TimeInterval t"),
+    @NamedQuery(name = "TimeInterval.findByTimeIntervalId", query = "SELECT t FROM TimeInterval t WHERE t.timeIntervalId = :timeIntervalId"),
+    @NamedQuery(name = "TimeInterval.findByIntervalStart", query = "SELECT t FROM TimeInterval t WHERE t.intervalStart = :intervalStart"),
+    @NamedQuery(name = "TimeInterval.findByIntervalEnd", query = "SELECT t FROM TimeInterval t WHERE t.intervalEnd = :intervalEnd"),
+    @NamedQuery(name = "TimeInterval.findByTypicalPeriod", query = "SELECT t FROM TimeInterval t WHERE t.typicalPeriod = :typicalPeriod")})
 public class TimeInterval implements Serializable {
 
     private static final long serialVersionUID = 1L;

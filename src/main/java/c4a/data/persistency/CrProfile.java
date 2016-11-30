@@ -28,15 +28,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "cr_profile")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "CrProfile.findAll", query = "SELECT c FROM CrProfile c"),
-//    @NamedQuery(name = "CrProfile.findById", query = "SELECT c FROM CrProfile c WHERE c.id = :id"),
-//    @NamedQuery(name = "CrProfile.findByHeight", query = "SELECT c FROM CrProfile c WHERE c.height = :height"),
-//    @NamedQuery(name = "CrProfile.findByWeight", query = "SELECT c FROM CrProfile c WHERE c.weight = :weight"),
-//    @NamedQuery(name = "CrProfile.findByBloodP", query = "SELECT c FROM CrProfile c WHERE c.bloodP = :bloodP"),
-//    @NamedQuery(name = "CrProfile.findByDate", query = "SELECT c FROM CrProfile c WHERE c.date = :date"),
-//    @NamedQuery(name = "CrProfile.findByAge", query = "SELECT c FROM CrProfile c WHERE c.age = :age"),
-//    @NamedQuery(name = "CrProfile.findByGender", query = "SELECT c FROM CrProfile c WHERE c.gender = :gender")})
+@NamedQueries({
+    @NamedQuery(name = "CrProfile.findAll", query = "SELECT c FROM CrProfile c"),
+    @NamedQuery(name = "CrProfile.findById", query = "SELECT c FROM CrProfile c WHERE c.id = :id"),
+    @NamedQuery(name = "CrProfile.findByHeight", query = "SELECT c FROM CrProfile c WHERE c.height = :height"),
+    @NamedQuery(name = "CrProfile.findByWeight", query = "SELECT c FROM CrProfile c WHERE c.weight = :weight"),
+    @NamedQuery(name = "CrProfile.findByBloodP", query = "SELECT c FROM CrProfile c WHERE c.bloodP = :bloodP"),
+    @NamedQuery(name = "CrProfile.findByDate", query = "SELECT c FROM CrProfile c WHERE c.date = :date"),
+    @NamedQuery(name = "CrProfile.findByAge", query = "SELECT c FROM CrProfile c WHERE c.age = :age"),
+    @NamedQuery(name = "CrProfile.findByGender", query = "SELECT c FROM CrProfile c WHERE c.gender = :gender")})
 public class CrProfile implements Serializable {
 
     private static final long serialVersionUID = 1L;

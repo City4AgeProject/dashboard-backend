@@ -34,12 +34,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @Table(name = "detection_variable")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "DetectionVariable.findAll", query = "SELECT d FROM DetectionVariable d"),
-//    @NamedQuery(name = "DetectionVariable.findByDetectionVariableId", query = "SELECT d FROM DetectionVariable d WHERE d.detectionVariableId = :detectionVariableId"),
-//    @NamedQuery(name = "DetectionVariable.findByDetectionVariableName", query = "SELECT d FROM DetectionVariable d WHERE d.detectionVariableName = :detectionVariableName"),
-//    @NamedQuery(name = "DetectionVariable.findByValidFrom", query = "SELECT d FROM DetectionVariable d WHERE d.validFrom = :validFrom"),
-//    @NamedQuery(name = "DetectionVariable.findByValidTo", query = "SELECT d FROM DetectionVariable d WHERE d.validTo = :validTo")})
+@NamedQueries({
+    @NamedQuery(name = "DetectionVariable.findAll", query = "SELECT d FROM DetectionVariable d"),
+    @NamedQuery(name = "DetectionVariable.findByDetectionVariableId", query = "SELECT d FROM DetectionVariable d WHERE d.detectionVariableId = :detectionVariableId"),
+    @NamedQuery(name = "DetectionVariable.findByDetectionVariableName", query = "SELECT d FROM DetectionVariable d WHERE d.detectionVariableName = :detectionVariableName"),
+    @NamedQuery(name = "DetectionVariable.findByValidFrom", query = "SELECT d FROM DetectionVariable d WHERE d.validFrom = :validFrom"),
+    @NamedQuery(name = "DetectionVariable.findByValidTo", query = "SELECT d FROM DetectionVariable d WHERE d.validTo = :validTo")})
 public class DetectionVariable implements Serializable {
 
     private static final long serialVersionUID = 1L;

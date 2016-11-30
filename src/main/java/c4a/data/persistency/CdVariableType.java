@@ -29,10 +29,10 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @Table(name = "cd_variable_type")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "CdVariableType.findAll", query = "SELECT c FROM CdVariableType c"),
-//    @NamedQuery(name = "CdVariableType.findByVariableType", query = "SELECT c FROM CdVariableType c WHERE c.variableType = :variableType"),
-//    @NamedQuery(name = "CdVariableType.findByVariableDescription", query = "SELECT c FROM CdVariableType c WHERE c.variableDescription = :variableDescription")})
+@NamedQueries({
+    @NamedQuery(name = "CdVariableType.findAll", query = "SELECT c FROM CdVariableType c"),
+    @NamedQuery(name = "CdVariableType.findByVariableType", query = "SELECT c FROM CdVariableType c WHERE c.variableType = :variableType"),
+    @NamedQuery(name = "CdVariableType.findByVariableDescription", query = "SELECT c FROM CdVariableType c WHERE c.variableDescription = :variableDescription")})
 public class CdVariableType implements Serializable {
 
     private static final long serialVersionUID = 1L;

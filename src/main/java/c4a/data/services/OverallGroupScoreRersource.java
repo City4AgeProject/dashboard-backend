@@ -10,7 +10,6 @@ import c4a.data.persistency.CrProfile;
 import c4a.data.persistency.DetectionVariable;
 import c4a.data.persistency.GereatricFactor;
 import c4a.data.persistency.Userinrole;
-import c4a.data.util.HibernateUtil;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,11 +22,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import org.hibernate.Session;
-import otn.mobile.bl.C4ACareReceiverListResponse;
-import otn.mobile.bl.C4ACareReceiversResponse;
-import otn.mobile.bl.C4AGroupsResponse;
-import otn.mobile.bl.C4ServiceGetOverallScoreListResponse;
+import c4a.mobile.bl.C4ACareReceiverListResponse;
+import c4a.mobile.bl.C4ACareReceiversResponse;
+import c4a.mobile.bl.C4AGroupsResponse;
+import c4a.mobile.bl.C4ServiceGetOverallScoreListResponse;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -37,7 +39,18 @@ import otn.mobile.bl.C4ServiceGetOverallScoreListResponse;
 @Path("careReceiversData")
 public class OverallGroupScoreRersource {
 
-    private static Session session = HibernateUtil.getSessionFactory().openSession();
+    @PersistenceContext(unitName = "c4AServicesPlatformPU")
+    private EntityManager em;
+
+    public void init() {
+        EntityManagerFactory factory;
+        factory = Persistence.createEntityManagerFactory("c4AServicesPlatformPU");
+        em = factory.createEntityManager();
+    }
+
+    public OverallGroupScoreRersource() {
+
+    }
 
     @GET
     @Path("getGroups")
@@ -54,23 +67,20 @@ public class OverallGroupScoreRersource {
 
         List<GereatricFactor> gereatricfactparamsList;
         List<DetectionVariable> detectionvarsparamsList;
-        ArrayList<C4ServiceGetOverallScoreListResponse> itemList ;
+        ArrayList<C4ServiceGetOverallScoreListResponse> itemList;
 
         /**
          * ****************Action*************
          */
-        if (!session.isOpen()) {
-            session = HibernateUtil.getSessionFactory().openSession();
-        }
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
+        if (em == null) {
+            init();
         }
 
         if (Integer.parseInt(parentFactorId) == -1) {
-            query_groups = (TypedQuery) session.createQuery("FROM DetectionVariable d WHERE d.detectionVariableType.variableType = :gefType ");
+            query_groups = (TypedQuery) em.createQuery("SELECT d FROM DetectionVariable d WHERE d.detectionVariableType.variableType = :gefType ");
             query_groups.setParameter("gefType", "FGR");
         } else {
-            query_groups = (TypedQuery) session.createQuery("FROM DetectionVariable d WHERE d.parentFactorId = :gefType ");
+            query_groups = (TypedQuery) em.createQuery("SELECT d FROM DetectionVariable d WHERE d.parentFactorId.detectionVariableId = :gefType ");
             query_groups.setParameter("gefType", parentFactorId);
         }
 
@@ -88,7 +98,7 @@ public class OverallGroupScoreRersource {
                         + "name " + types.getDetectionVariableName()
                         + " type name " + types.getDetectionVariableType().getVariableType());
 
-                query = (TypedQuery) session.createQuery("FROM GereatricFactor g WHERE g.detectionVariableId.detectionVariableId = :varId "
+                query = (TypedQuery) em.createQuery("SELECT g FROM GereatricFactor g WHERE g.detectionVariableId.detectionVariableId = :varId "
                         + "and g.userInRoleId.userInRoleId = :userId");
                 query.setParameter("varId", types.getDetectionVariableId());
                 query.setParameter("userId", Integer.parseInt(careReceiverId));
@@ -129,10 +139,6 @@ public class OverallGroupScoreRersource {
 
         }//end detectionVariables is empty
 
-        //close session
-        session.close();
-        HibernateUtil.shutdown();
-
         return response;
 
     }//end method
@@ -148,7 +154,7 @@ public class OverallGroupScoreRersource {
         C4ACareReceiversResponse response = new C4ACareReceiversResponse();
         TypedQuery query;
         TypedQuery query_crProfile;
-        TypedQuery query_users ;
+        TypedQuery query_users;
 
         List<Userinrole> userinroleparamsList;
         List<CrProfile> crprofileparamsList;
@@ -158,14 +164,11 @@ public class OverallGroupScoreRersource {
         /**
          * ****************Action*************
          */
-        if (!session.isOpen()) {
-            session = HibernateUtil.getSessionFactory().openSession();
-        }
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
+        if (em == null) {
+            init();
         }
 
-        query_users = (TypedQuery) session.createQuery("FROM Userinrole u Where u.summary IS NOT NULL");
+        query_users = (TypedQuery) em.createQuery("SELECT u FROM Userinrole u Where u.summary IS NOT NULL");
 
         userinroleparamsList = query_users.getResultList();
 
@@ -181,7 +184,7 @@ public class OverallGroupScoreRersource {
 //                System.out.println("id " + users.getStakeholderId()
 //                        + "name " + users.getUserInRoleId());
 
-                query_crProfile = (TypedQuery) session.createQuery("FROM CrProfile c Where c.userInRoleId.userInRoleId = :userId ");
+                query_crProfile = (TypedQuery) em.createQuery("SELECT c FROM CrProfile c Where c.userInRoleId.userInRoleId = :userId ");
                 query_crProfile.setParameter("userId", users.getUserInRoleId());
 
                 //we use list to avoid "not found" exception
@@ -193,7 +196,7 @@ public class OverallGroupScoreRersource {
 //                            + " age " + crprofileparamsList.get(0).getAge());
                 }
 
-                query = (TypedQuery) session.createQuery("FROM CareProfile c WHERE c.userInRoleId = :userId ");
+                query = (TypedQuery) em.createQuery("SELECT c FROM CareProfile c WHERE c.userInRoleId = :userId ");
                 query.setParameter("userId", users.getUserInRoleId());
 
                 //we use list to avoid "not found" exception
@@ -220,17 +223,12 @@ public class OverallGroupScoreRersource {
 //                            + " frailty status " + careprofileparamsList.get(0).getFrailtyStatus());
                 }
 
-
                 itemList.add(new C4ACareReceiverListResponse(users.getUserInRoleId(), age, frailtyStatus, frailtyNotice, attention, textline,
                         interventionstatus, interventionDate, detectionStatus, detectionDate));
             }//detectionVariables loop    
             response.setItemList(itemList);
 
         }//end detectionVariables is empty
-
-        //close session
-        session.close();
-        HibernateUtil.shutdown();
 
         return response;
 

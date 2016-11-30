@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package otn.mobile.bl;
+package c4a.mobile.bl;
 
 import java.util.List;
 
@@ -11,15 +11,13 @@ import java.util.List;
  *
  * @author EMantziou
  */
-public class C4ASeriesResponse {
+public class C4ACareReceiversResponse {
 
     private String message;
 
     private int responseCode;
-    
-    private String SeriesName;
 
-    private List<C4AServiceGetItemssListResponse> ItemList;
+    private List<C4ACareReceiverListResponse> ItemList;
 
     public String getMessage() {
         return message;
@@ -37,20 +35,12 @@ public class C4ASeriesResponse {
         this.responseCode = responseCode;
     }
 
-    public String getSeriesName() {
-        return SeriesName;
-    }
-
-    public void setSeriesName(String SeriesName) {
-        this.SeriesName = SeriesName;
-    }
-    
-    public List<C4AServiceGetItemssListResponse> getItemList() {
+    public List<C4ACareReceiverListResponse> getItemList() {
         return ItemList;
     }
 
-    public void setItemList(List<C4AServiceGetItemssListResponse> ItemList) {
+    public void setItemList(List<C4ACareReceiverListResponse> ItemList) {
         this.ItemList = ItemList;
     }
 
-}//end class
+}//end clas

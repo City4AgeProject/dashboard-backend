@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="com.mycompany_c4AServices_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>c4a.data.persistency.Userinrole</class>
-    <class>c4a.data.persistency.Gereatricindicator</class>
-    <class>c4a.data.persistency.Overallgroupuser</class>
-    <class>c4a.data.persistency.Gereatricsubindicator</class>
-    <class>c4a.data.persistency.Groups</class>
-    <class>c4a.data.persistency.User_gri</class>
-    <class>c4a.data.persistency.DetectionVariable</class>
-    <class>c4a.data.persistency.CdVariableType</class>
-    <class>c4a.data.persistency.GereatricFactor</class>
-    <class>c4a.data.persistency.TimeInterval</class>
-    <class>c4a.data.persistency.CrProfile</class>
-    <class>c4a.data.persistency.CareProfile</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/c4a_web_app"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="admin"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="c4AServicesPlatformPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>c4a.data.persistency.Userinrole</class>
+        <class>c4a.data.persistency.Gereatricindicator</class>
+        <class>c4a.data.persistency.Overallgroupuser</class>
+        <class>c4a.data.persistency.Gereatricsubindicator</class>
+        <class>c4a.data.persistency.Groups</class>
+        <class>c4a.data.persistency.User_gri</class>
+        <class>c4a.data.persistency.DetectionVariable</class>
+        <class>c4a.data.persistency.CdVariableType</class>
+        <class>c4a.data.persistency.GereatricFactor</class>
+        <class>c4a.data.persistency.TimeInterval</class>
+        <class>c4a.data.persistency.CrProfile</class>
+        <class>c4a.data.persistency.CareProfile</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/c4a_web_app"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+           
+      
+      
+        </properties>
+    </persistence-unit>
 </persistence>

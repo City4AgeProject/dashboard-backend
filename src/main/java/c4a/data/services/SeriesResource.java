@@ -7,7 +7,6 @@ package c4a.data.services;
 
 import c4a.data.persistency.Items;
 import c4a.data.persistency.Series;
-import c4a.data.util.HibernateUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +18,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import otn.mobile.bl.C4ASeriesResponse;
-import otn.mobile.bl.C4AServiceGetItemssListResponse;
+import c4a.mobile.bl.C4ASeriesResponse;
+import c4a.mobile.bl.C4AServiceGetItemssListResponse;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -33,8 +33,15 @@ import otn.mobile.bl.C4AServiceGetItemssListResponse;
 @Path("series")
 public class SeriesResource {
 
-    private static Session session = HibernateUtil.getSessionFactory().openSession();
+ @PersistenceContext(unitName = "c4AServicesPlatformPU")
+    private EntityManager em;
 
+    public void init() {
+        EntityManagerFactory factory;
+        factory = Persistence.createEntityManagerFactory("c4AServicesPlatformPU");
+        em = factory.createEntityManager();
+    }
+    
     @GET
     @Path("test/{SeriesID}")
     @Consumes("application/json")
@@ -53,16 +60,15 @@ public class SeriesResource {
         /**
          * ****************Action*************
          */
-        if (!session.isOpen()) {
-            session = HibernateUtil.getSessionFactory().openSession();
-        }
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
+        
+        if (em == null) {
+            init();
         }
 
-        series = (Series) session.get(Series.class, 3);
 
-        query = (TypedQuery) session.createQuery("SELECT i FROM Items i WHERE  i.id.id = :seriesId ");
+        series = (Series) em.find(Series.class, 3);
+
+        query = (TypedQuery) em.createQuery("SELECT i FROM Items i WHERE  i.id.id = :seriesId ");
         query.setParameter("seriesId", Integer.parseInt(SeriesID));
 
         if (series == null) {
@@ -90,9 +96,7 @@ public class SeriesResource {
             itemList.add(new C4AServiceGetItemssListResponse(itemssparamsList));
             response.setItemList(itemList);
         }
-        //close session
-        session.close();
-        HibernateUtil.shutdown();
+       
 
         return response;
     }

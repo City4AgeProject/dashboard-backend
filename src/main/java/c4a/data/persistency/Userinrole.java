@@ -34,14 +34,14 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @Table(name = "userinrole")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "Userinrole.findAll", query = "SELECT u FROM Userinrole u"),
-//    @NamedQuery(name = "Userinrole.findByUserInRoleId", query = "SELECT u FROM Userinrole u WHERE u.userInRoleId = :userInRoleId"),
-//    @NamedQuery(name = "Userinrole.findByPilotId", query = "SELECT u FROM Userinrole u WHERE u.pilotId = :pilotId"),
-//    @NamedQuery(name = "Userinrole.findByValidFrom", query = "SELECT u FROM Userinrole u WHERE u.validFrom = :validFrom"),
-//    @NamedQuery(name = "Userinrole.findByValidTo", query = "SELECT u FROM Userinrole u WHERE u.validTo = :validTo"),
-//    @NamedQuery(name = "Userinrole.findByStakeholderId", query = "SELECT u FROM Userinrole u WHERE u.stakeholderId = :stakeholderId"),
-//    @NamedQuery(name = "Userinrole.findBySummary", query = "SELECT u FROM Userinrole u WHERE u.summary = :summary")})
+@NamedQueries({
+    @NamedQuery(name = "Userinrole.findAll", query = "SELECT u FROM Userinrole u"),
+    @NamedQuery(name = "Userinrole.findByUserInRoleId", query = "SELECT u FROM Userinrole u WHERE u.userInRoleId = :userInRoleId"),
+    @NamedQuery(name = "Userinrole.findByPilotId", query = "SELECT u FROM Userinrole u WHERE u.pilotId = :pilotId"),
+    @NamedQuery(name = "Userinrole.findByValidFrom", query = "SELECT u FROM Userinrole u WHERE u.validFrom = :validFrom"),
+    @NamedQuery(name = "Userinrole.findByValidTo", query = "SELECT u FROM Userinrole u WHERE u.validTo = :validTo"),
+    @NamedQuery(name = "Userinrole.findByStakeholderId", query = "SELECT u FROM Userinrole u WHERE u.stakeholderId = :stakeholderId"),
+    @NamedQuery(name = "Userinrole.findBySummary", query = "SELECT u FROM Userinrole u WHERE u.summary = :summary")})
 public class Userinrole implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "userinrole")

@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "gereatric_factor")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "GereatricFactor.findAll", query = "SELECT g FROM GereatricFactor g"),
-//    @NamedQuery(name = "GereatricFactor.findByGereatricFactorId", query = "SELECT g FROM GereatricFactor g WHERE g.gereatricFactorId = :gereatricFactorId"),
-//    @NamedQuery(name = "GereatricFactor.findByGefValue", query = "SELECT g FROM GereatricFactor g WHERE g.gefValue = :gefValue")})
+@NamedQueries({
+    @NamedQuery(name = "GereatricFactor.findAll", query = "SELECT g FROM GereatricFactor g"),
+    @NamedQuery(name = "GereatricFactor.findByGereatricFactorId", query = "SELECT g FROM GereatricFactor g WHERE g.gereatricFactorId = :gereatricFactorId"),
+    @NamedQuery(name = "GereatricFactor.findByGefValue", query = "SELECT g FROM GereatricFactor g WHERE g.gefValue = :gefValue")})
 public class GereatricFactor implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -28,19 +28,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "care_profile")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "CareProfile.findAll", query = "SELECT c FROM CareProfile c"),
-//    @NamedQuery(name = "CareProfile.findByUserInRoleId", query = "SELECT c FROM CareProfile c WHERE c.userInRoleId = :userInRoleId"),
-//    @NamedQuery(name = "CareProfile.findByDetectionSummary", query = "SELECT c FROM CareProfile c WHERE c.detectionSummary = :detectionSummary"),
-//    @NamedQuery(name = "CareProfile.findByFrailtyStatus", query = "SELECT c FROM CareProfile c WHERE c.frailtyStatus = :frailtyStatus"),
-//    @NamedQuery(name = "CareProfile.findByAttentionStatus", query = "SELECT c FROM CareProfile c WHERE c.attentionStatus = :attentionStatus"),
-//    @NamedQuery(name = "CareProfile.findByInterventionStatus", query = "SELECT c FROM CareProfile c WHERE c.interventionStatus = :interventionStatus"),
-//    @NamedQuery(name = "CareProfile.findByFrailtyNotice", query = "SELECT c FROM CareProfile c WHERE c.frailtyNotice = :frailtyNotice"),
-//    @NamedQuery(name = "CareProfile.findByCreated", query = "SELECT c FROM CareProfile c WHERE c.created = :created"),
-//    @NamedQuery(name = "CareProfile.findByLastUpdated", query = "SELECT c FROM CareProfile c WHERE c.lastUpdated = :lastUpdated"),
-//    @NamedQuery(name = "CareProfile.findByLastDetection", query = "SELECT c FROM CareProfile c WHERE c.lastDetection = :lastDetection"),
-//    @NamedQuery(name = "CareProfile.findByLastIntervention", query = "SELECT c FROM CareProfile c WHERE c.lastIntervention = :lastIntervention"),
-//    @NamedQuery(name = "CareProfile.findByDetectionStatus", query = "SELECT c FROM CareProfile c WHERE c.detectionStatus = :detectionStatus")})
+@NamedQueries({
+    @NamedQuery(name = "CareProfile.findAll", query = "SELECT c FROM CareProfile c"),
+    @NamedQuery(name = "CareProfile.findByUserInRoleId", query = "SELECT c FROM CareProfile c WHERE c.userInRoleId = :userInRoleId"),
+    @NamedQuery(name = "CareProfile.findByDetectionSummary", query = "SELECT c FROM CareProfile c WHERE c.detectionSummary = :detectionSummary"),
+    @NamedQuery(name = "CareProfile.findByFrailtyStatus", query = "SELECT c FROM CareProfile c WHERE c.frailtyStatus = :frailtyStatus"),
+    @NamedQuery(name = "CareProfile.findByAttentionStatus", query = "SELECT c FROM CareProfile c WHERE c.attentionStatus = :attentionStatus"),
+    @NamedQuery(name = "CareProfile.findByInterventionStatus", query = "SELECT c FROM CareProfile c WHERE c.interventionStatus = :interventionStatus"),
+    @NamedQuery(name = "CareProfile.findByFrailtyNotice", query = "SELECT c FROM CareProfile c WHERE c.frailtyNotice = :frailtyNotice"),
+    @NamedQuery(name = "CareProfile.findByCreated", query = "SELECT c FROM CareProfile c WHERE c.created = :created"),
+    @NamedQuery(name = "CareProfile.findByLastUpdated", query = "SELECT c FROM CareProfile c WHERE c.lastUpdated = :lastUpdated"),
+    @NamedQuery(name = "CareProfile.findByLastDetection", query = "SELECT c FROM CareProfile c WHERE c.lastDetection = :lastDetection"),
+    @NamedQuery(name = "CareProfile.findByLastIntervention", query = "SELECT c FROM CareProfile c WHERE c.lastIntervention = :lastIntervention"),
+    @NamedQuery(name = "CareProfile.findByDetectionStatus", query = "SELECT c FROM CareProfile c WHERE c.detectionStatus = :detectionStatus")})
 public class CareProfile implements Serializable {
 
     private static final long serialVersionUID = 1L;
