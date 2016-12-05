@@ -10,6 +10,7 @@ import c4a.data.persistency.CrProfile;
 import c4a.data.persistency.DetectionVariable;
 import c4a.data.persistency.GereatricFactor;
 import c4a.data.persistency.Userinrole;
+import c4a.mobile.bl.C4ACareReceiverGroupsResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import c4a.mobile.bl.C4ACareReceiverListResponse;
 import c4a.mobile.bl.C4ACareReceiversResponse;
 import c4a.mobile.bl.C4AGroupsResponse;
 import c4a.mobile.bl.C4ServiceGetOverallScoreListResponse;
+import java.util.Arrays;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -79,12 +81,13 @@ public class OverallGroupScoreRersource {
         if (Integer.parseInt(parentFactorId) == -1) {
             query_groups = (TypedQuery) em.createQuery("SELECT d FROM DetectionVariable d WHERE d.detectionVariableType.variableType = :gefType ");
             query_groups.setParameter("gefType", "FGR");
+            detectionvarsparamsList = query_groups.getResultList();
         } else {
-            query_groups = (TypedQuery) em.createQuery("SELECT d FROM DetectionVariable d WHERE d.parentFactorId.detectionVariableId = :gefType ");
-            query_groups.setParameter("gefType", parentFactorId);
+            List<Integer> parentFactors = Arrays.asList(1,2);
+            query_groups = (TypedQuery) em.createQuery("SELECT d FROM DetectionVariable d WHERE d.parentFactorId.detectionVariableId IN :gefType");
+            query_groups.setParameter("gefType", parentFactors);
+            detectionvarsparamsList = query_groups.getResultList();
         }
-
-        detectionvarsparamsList = query_groups.getResultList();
 
         if (detectionvarsparamsList.isEmpty()) {
             response.setMessage("No detection variables found");
@@ -94,9 +97,9 @@ public class OverallGroupScoreRersource {
             itemList = new ArrayList<C4ServiceGetOverallScoreListResponse>();
             for (DetectionVariable types : detectionvarsparamsList) {
 
-                System.out.println("id " + types.getDetectionVariableId()
-                        + "name " + types.getDetectionVariableName()
-                        + " type name " + types.getDetectionVariableType().getVariableType());
+//                System.out.println("id " + types.getDetectionVariableId()
+//                        + "name " + types.getDetectionVariableName()
+//                        + " type name " + types.getDetectionVariableType().getVariableType());
 
                 query = (TypedQuery) em.createQuery("SELECT g FROM GereatricFactor g WHERE g.detectionVariableId.detectionVariableId = :varId "
                         + "and g.userInRoleId.userInRoleId = :userId");
@@ -130,8 +133,13 @@ public class OverallGroupScoreRersource {
 
                     response.setCareReceiverName(gereatricfactparamsList.get(0).getUserInRoleId().getStakeholderId());
 
+                   
+                   
                     itemList.add(new C4ServiceGetOverallScoreListResponse(gereatricfactparamsList));
+                    
+//                     C4ACareReceiverGroupsResponse res = new C4ACareReceiverGroupsResponse(gereatricfactparamsList.get(0).getDetectionVariableId().getParentFactorId().getDetectionVariableName(),itemList);
                     response.setItemList(itemList);
+ 
 
                 }
 

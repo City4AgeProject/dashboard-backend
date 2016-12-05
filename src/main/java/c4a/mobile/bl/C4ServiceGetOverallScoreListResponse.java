@@ -25,6 +25,8 @@ public class C4ServiceGetOverallScoreListResponse {
 
     private String groupName;
 
+    private String parentGroupName;
+
     public C4ServiceGetOverallScoreListResponse(List<GereatricFactor> gereatricfactparamsList) {
 //         groupName = gereatricfactparamsList.get(0).getDetectionVariableId().getDetectionVariableName();
         items = new ArrayList<C4AServiceGetGereatricFactorsResponse>();
@@ -37,12 +39,33 @@ public class C4ServiceGetOverallScoreListResponse {
             groupName = factors.getDetectionVariableId().getDetectionVariableName();
 
         }
-        items.add(new C4AServiceGetGereatricFactorsResponse(groupName, ItemList,dateList));
+        if (gereatricfactparamsList.get(0).getDetectionVariableId().getParentFactorId() != null) {
+            parentGroupName = gereatricfactparamsList.get(0).getDetectionVariableId().getParentFactorId().getDetectionVariableName();
+        } else {
+            parentGroupName = "";
+        }
+        items.add(new C4AServiceGetGereatricFactorsResponse(groupName, ItemList, dateList));
 
     }
 
     public List<C4AServiceGetGereatricFactorsResponse> getItems() {
         return items;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getParentGroupName() {
+        return parentGroupName;
+    }
+
+    public void setParentGroupName(String parentGroupName) {
+        this.parentGroupName = parentGroupName;
     }
 
 }//end class
